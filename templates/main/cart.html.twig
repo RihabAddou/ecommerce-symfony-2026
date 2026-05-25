@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart - Our Store{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4">Shopping Cart</h1>
+
+    {% if cartProducts is empty %}
+        <div class="alert alert-info">Your cart is empty.</div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cartProducts %}
+                    <tr>
+                        <td>
+                            <img src="{{ asset('images/item.png') }}" width="50" class="me-2">
+                            {{ item.product.title }}
+                        </td>
+                        <td>${{ item.product.sellPrice }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.total }}</td>
+                        <td>
+                            <a href="{{ path('app_cart_remove', {id: item.product.id}) }}" 
+                               class="btn btn-sm btn-danger">
+                                Remove
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-end mt-4">
+            <h3>Total: ${{ grandTotal }}</h3>
+            <a href="#" class="btn btn-success btn-lg">Checkout</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

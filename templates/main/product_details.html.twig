@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.title }} - Our Store{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ asset('images/item.png') }}" class="img-fluid rounded" alt="{{ product.title }}">
+        </div>
+        <div class="col-md-6">
+            {% if product.category %}
+                <span class="badge bg-primary mb-2">{{ product.category.name }}</span>
+            {% endif %}
+            <h1 class="display-5">{{ product.title }}</h1>
+            <p class="lead fw-bold text-success fs-2">${{ product.sellPrice }}</p>
+            <p class="text-muted">Qualité premium, livraison rapide.</p>
+            <hr>
+            <div class="d-grid gap-2">
+                <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-primary btn-lg">
+                    Add to Cart
+                </a>
+                <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
+                    Back to Products
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

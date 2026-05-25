@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Profile - Our Store{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ asset('images/profile.png') }}" class="rounded-circle mb-3" alt="User Avatar" width="150" height="150">
+                    
+                    {# Affichage de l'email de l'utilisateur connecté comme titre principal de la carte #}
+                    <h5 class="card-title">{{ app.user.email }}</h5>
+                    <p class="text-muted">Utilisateur Connecté</p>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#profile" class="text-decoration-none">Profile Information</a></li>
+                        <li class="mb-2"><a href="#orders" class="text-decoration-none">My Orders</a></li>
+                        {# Route officielle de déconnexion gérée par ton security.yaml #}
+                        <li class="mb-2"><a href="{{ path('app_logout') }}" class="text-decoration-none text-danger">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card mb-4" id="profile">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Profile Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {# Affiche la chaîne retournée par getUserIdentifier() de ton entité #}
+                            <label class="fw-bold">User Identifier:</label>
+                            <p>{{ app.user.userIdentifier }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Email:</label>
+                            <p>{{ app.user.email }}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary">Edit Profile</button>
+                </div>
+            </div>
+            <div class="card" id="orders">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Order History</h5>
+                </div>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6>Order #ORD-2026-001</h6>
+                                    <p class="text-muted mb-1">Placed on: May 25, 2026</p>
+                                    <p class="mb-0"><strong>Total:</strong> $139.98</p>
+                                </div>
+                                <div class="col-md-4 text-md-end">
+                                    <span class="badge bg-success">Delivered</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
